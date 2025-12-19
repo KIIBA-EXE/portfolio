@@ -43,7 +43,7 @@ export default function Services() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {services.map((service, index) => (
                     <TiltWrapper key={index} className="h-full">
-                        <div className={`h-full p-8 rounded-2xl bg-zinc-900/50 border border-white/10 backdrop-blur-sm hover:bg-zinc-900/80 transition-all group relative overflow-hidden`}>
+                        <div className={`h-full p-6 md:p-8 rounded-2xl bg-zinc-900/50 border border-white/10 backdrop-blur-sm hover:bg-zinc-900/80 transition-all group relative overflow-hidden`}>
                             {/* Radial Gradient Background */}
                             <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 

@@ -44,7 +44,7 @@ export default function Timeline() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.2 }}
-                        className="relative pl-8 md:pl-12"
+                        className="relative pl-6 md:pl-12"
                     >
                         {/* Dot */}
                         <span className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-4 ring-zinc-900" />

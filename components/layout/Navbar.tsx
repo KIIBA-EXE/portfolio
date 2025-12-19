@@ -1,17 +1,18 @@
-"use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import { useSession } from "next-auth/react";
-import { Shield } from "lucide-react";
+import { Shield, Menu, X } from "lucide-react";
 
 export default function Navbar() {
     const pathname = usePathname();
     const { t } = useLanguage();
     const { data: session } = useSession();
+    const [isOpen, setIsOpen] = useState(false);
 
     const navItems = [
         { name: t.nav.home, path: "/" },
@@ -32,7 +33,8 @@ export default function Navbar() {
                     Portfolio
                 </Link>
 
-                <div className="flex items-center gap-6">
+                {/* Desktop Menu */}
+                <div className="hidden md:flex items-center gap-6">
                     {navItems.map((item) => (
                         <Link
                             key={item.path}
@@ -58,7 +60,53 @@ export default function Navbar() {
                         <LanguageSwitcher />
                     </div>
                 </div>
+
+                {/* Mobile Menu Toggle */}
+                <div className="flex items-center gap-4 md:hidden">
+                    <LanguageSwitcher />
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="p-1 text-zinc-400 hover:text-white transition-colors"
+                    >
+                        {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                    </button>
+                </div>
             </div>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                        className="absolute top-full left-4 right-4 mt-2 p-4 rounded-2xl bg-zinc-900/90 backdrop-blur-xl border border-white/10 shadow-xl overflow-hidden md:hidden"
+                    >
+                        <div className="flex flex-col gap-2">
+                            {navItems.map((item) => (
+                                <Link
+                                    key={item.path}
+                                    href={item.path}
+                                    onClick={() => setIsOpen(false)}
+                                    className="px-4 py-3 text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                                >
+                                    {item.name}
+                                </Link>
+                            ))}
+                            {session && (
+                                <Link
+                                    href="/admin"
+                                    onClick={() => setIsOpen(false)}
+                                    className="px-4 py-3 text-sm font-medium text-zinc-400 hover:text-emerald-400 hover:bg-emerald-500/10 rounded-xl transition-all flex items-center gap-2"
+                                >
+                                    <Shield className="w-4 h-4" />
+                                    Admin Dashboard
+                                </Link>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.nav>
     );
 }
