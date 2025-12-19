@@ -28,7 +28,7 @@ export default function Home() {
             description={t.bento.github_desc}
             header={
               <div className="relative w-full h-full min-h-[6rem] rounded-xl overflow-hidden border border-white/10 group-hover/bento:border-white/20 transition-colors">
-                <div className="absolute inset-0 bg-[url('file:///home/kiiba/.gemini/antigravity/brain/4cb464cf-27dc-481d-9014-a6d236f12cca/github_card_bg_1766050037554.png')] bg-cover bg-center opacity-60 group-hover/bento:opacity-80 transition-opacity" />
+                <div className="absolute inset-0 bg-[url('/images/github_card_bg.png')] bg-cover bg-center opacity-60 group-hover/bento:opacity-80 transition-opacity" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               </div>
             }
@@ -71,7 +71,7 @@ export default function Home() {
             description={t.bento.exp_desc}
             header={
               <div className="relative w-full h-full min-h-[6rem] rounded-xl overflow-hidden border border-white/10 group-hover/bento:border-white/20 transition-colors">
-                <div className="absolute inset-0 bg-[url('file:///home/kiiba/.gemini/antigravity/brain/4cb464cf-27dc-481d-9014-a6d236f12cca/dans_les_bottes_bg_1766050146986.png')] bg-cover bg-center opacity-70 group-hover/bento:opacity-90 transition-opacity" />
+                <div className="absolute inset-0 bg-[url('/images/dans_les_bottes_bg.png')] bg-cover bg-center opacity-70 group-hover/bento:opacity-90 transition-opacity" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               </div>
             }
