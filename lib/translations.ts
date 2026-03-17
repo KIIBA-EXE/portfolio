@@ -54,7 +54,12 @@ export const translations = {
         projects: {
             title: "Tous les Projets",
             subtitle: "Une collection de mes travaux, expérimentations et contributions open-source.",
-            back: "Retour à l'accueil"
+            back: "Retour à l'accueil",
+            back_to_projects: "Retour aux projets",
+            view_details: "Voir les détails",
+            view_on_github: "Voir sur GitHub",
+            about_project: "À propos du projet",
+            not_found: "Projet introuvable",
         },
         about: {
             title: "À propos de moi",
@@ -129,7 +134,12 @@ export const translations = {
         projects: {
             title: "All Projects",
             subtitle: "A collection of my work, experiments, and open-source contributions.",
-            back: "Back to Home"
+            back: "Back to Home",
+            back_to_projects: "Back to Projects",
+            view_details: "View Details",
+            view_on_github: "View on GitHub",
+            about_project: "About the Project",
+            not_found: "Project Not Found",
         },
         about: {
             title: "About Me",

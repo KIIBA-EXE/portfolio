@@ -76,7 +76,7 @@ export default function Home() {
               </div>
             }
             icon={<Terminal className="w-4 h-4 text-zinc-500" />}
-            link="/experience/dans-les-bottes"
+            link="https://www.danslesbottes.fr"
             className="md:col-span-1"
           />
 

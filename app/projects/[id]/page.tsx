@@ -2,19 +2,23 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Github, ExternalLink, Calendar, Code2 } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, Github, Code2 } from "lucide-react";
 import { projects } from "@/lib/data";
-import { notFound } from "next/navigation";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function ProjectDetailPage({ params }: { params: { id: string } }) {
+    const { t } = useLanguage();
     const project = projects.find((p) => p.id === params.id);
 
     if (!project) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#050505] text-white">
                 <div className="text-center">
-                    <h1 className="text-2xl font-bold mb-4">Projet introuvable</h1>
-                    <Link href="/projects" className="text-zinc-400 hover:text-white underline">Retour aux projets</Link>
+                    <h1 className="text-2xl font-bold mb-4">{t.projects.not_found}</h1>
+                    <Link href="/projects" className="text-zinc-400 hover:text-white underline">
+                        {t.projects.back_to_projects}
+                    </Link>
                 </div>
             </div>
         );
@@ -25,7 +29,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             <article className="max-w-4xl mx-auto">
                 <Link href="/projects" className="inline-flex items-center text-zinc-400 hover:text-white transition-colors mb-8 group">
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                    Retour aux projets
+                    {t.projects.back_to_projects}
                 </Link>
 
                 <motion.div
@@ -41,17 +45,22 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
 
                     <div className="grid md:grid-cols-3 gap-12 mb-16">
                         <div className="md:col-span-2 space-y-8">
-                            <div className="aspect-video w-full bg-zinc-900 rounded-xl overflow-hidden border border-white/10 flex items-center justify-center">
-                                {/* Placeholder for project showcase image */}
-                                <span className="text-zinc-700 font-medium">Image de présentation</span>
+                            <div className="aspect-video w-full bg-zinc-900 rounded-xl overflow-hidden border border-white/10 relative">
+                                <Image
+                                    src={project.image}
+                                    alt={project.title}
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 768px) 100vw, 66vw"
+                                    priority
+                                />
                             </div>
 
                             <div className="prose prose-invert max-w-none">
-                                <h3 className="text-2xl font-bold text-white mb-4">À propos du projet</h3>
+                                <h3 className="text-2xl font-bold text-white mb-4">{t.projects.about_project}</h3>
                                 <p className="text-zinc-300 leading-relaxed">
                                     {project.fullDescription}
                                 </p>
-                                {/* Add more content paragraphs if available in data */}
                             </div>
                         </div>
 
@@ -78,7 +87,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                                         className="flex items-center justify-center w-full px-4 py-3 bg-white text-black rounded-lg font-bold hover:bg-zinc-200 transition-colors"
                                     >
                                         <Github className="w-5 h-5 mr-2" />
-                                        Voir sur GitHub
+                                        {t.projects.view_on_github}
                                     </a>
                                 </div>
                             </div>

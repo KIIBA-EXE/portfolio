@@ -19,8 +19,8 @@ export default function Navbar() {
     const navItems = [
         { name: t.nav.home, path: "/" },
         { name: t.nav.projects, path: "/projects" },
-        { name: t.nav.about, path: "#about" },
-        { name: t.nav.contact, path: "#contact" },
+        { name: t.nav.about, path: "/#about" },
+        { name: t.nav.contact, path: "/#contact" },
     ];
 
     return (

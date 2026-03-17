@@ -56,7 +56,7 @@ export const BentoCard = ({
                     </div>
 
                     {link && (
-                        <a href={link} className="flex items-center gap-1 mt-4 text-sm text-neutral-400 hover:text-white transition-colors">
+                        <a href={link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 mt-4 text-sm text-neutral-400 hover:text-white transition-colors">
                             View Project <ArrowUpRight className="w-3 h-3" />
                         </a>
                     )}
