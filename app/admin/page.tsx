@@ -14,12 +14,19 @@ interface Message {
     read: boolean;
 }
 
+interface Update {
+    id: string;
+    title: string;
+    content: string;
+    date: string;
+}
+
 export default function AdminDashboard() {
     const { data: session, status } = useSession();
     const router = useRouter();
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(true);
-    const [updates, setUpdates] = useState<any[]>([]);
+    const [updates, setUpdates] = useState<Update[]>([]);
     const [newUpdate, setNewUpdate] = useState({ title: "", content: "" });
 
     // Protected Route
@@ -32,18 +39,22 @@ export default function AdminDashboard() {
     // Fetch data
     useEffect(() => {
         if (status === "authenticated") {
-            fetch("/api/contact")
-                .then(res => res.json())
-                .then(data => {
-                    setMessages(data);
-                    setLoading(false);
-                })
-                .catch(err => console.error(err));
-
-            fetch("/api/updates")
-                .then(res => res.json())
-                .then(data => setUpdates(data))
-                .catch(err => console.error(err));
+            Promise.allSettled([
+                fetch("/api/contact")
+                    .then(async (res) => {
+                        if (!res.ok) throw new Error("Failed to fetch messages");
+                        return res.json();
+                    })
+                    .then((data: Message[]) => setMessages(data)),
+                fetch("/api/updates?all=1")
+                    .then(async (res) => {
+                        if (!res.ok) throw new Error("Failed to fetch updates");
+                        return res.json();
+                    })
+                    .then((data: Update[]) => setUpdates(data)),
+            ]).finally(() => {
+                setLoading(false);
+            });
         }
     }, [status]);
 

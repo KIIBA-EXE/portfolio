@@ -27,8 +27,8 @@ export default function LoginPage() {
             }
 
             router.push("/admin");
-        } catch (error) {
-            console.log(error);
+        } catch {
+            setError("Erreur réseau, réessaie dans un instant");
         }
     };
 

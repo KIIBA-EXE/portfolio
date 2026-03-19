@@ -5,6 +5,25 @@ import { authOptions } from "@/lib/auth";
 
 // GET latest updates (public)
 export async function GET(req: Request) {
+    const { searchParams } = new URL(req.url);
+    const includeAll = searchParams.get("all") === "1";
+
+    if (includeAll) {
+        const session = await getServerSession(authOptions);
+
+        if (!session) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
+        const allUpdates = await prisma.projectUpdate.findMany({
+            orderBy: {
+                date: 'desc'
+            }
+        });
+
+        return NextResponse.json(allUpdates);
+    }
+
     const updates = await prisma.projectUpdate.findMany({
         orderBy: {
             date: 'desc'
